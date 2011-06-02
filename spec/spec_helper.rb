@@ -1,3 +1,2 @@
-require 'rspec'
-require "rspec/expectations"
+require 'rspec/core'
 require 'deep-matchers'
