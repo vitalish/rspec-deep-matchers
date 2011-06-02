@@ -4,7 +4,7 @@ require "version"
 
 Gem::Specification.new do |s|
   s.name        = "rspec-deep-matchers"
-  s.version     = RSpec::Deep::Matchers::VERSION
+  s.version     = Deep::Matchers::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["vitalish"]
   s.email       = ["vitalish@4life.com.ua"]
