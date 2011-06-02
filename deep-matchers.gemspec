@@ -6,11 +6,11 @@ Gem::Specification.new do |s|
   s.name        = "deep-matchers"
   s.version     = Deep::Matchers::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
+  s.authors     = ["vitalish"]
+  s.email       = ["vitalish@4life.com.ua"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{Deep Hash matcher for rspec}
+  s.description = s.summary
 
   s.rubyforge_project = "deep-matchers"
 
@@ -18,4 +18,6 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
+
+  s.add_dependency 'rspec', '>= 2.0.0'
 end
