@@ -1,6 +1,10 @@
 module RSpec
   module Matchers
 
+    def deep_eql(expected)
+      DeepEql.new(expected)
+    end
+
     class DeepEql
 
       def initialize(expectation)
@@ -8,32 +12,36 @@ module RSpec
       end
 
       def matches?(target)
+        p target
+        p @expectation
+        @target = target
         case @expectation
         when Hash
-          target.is_a?(Hash) &&
-          target.keys.count.should == @expectation.keys.count &&
+          @target.is_a?(Hash) &&
+          @target.keys.count == @expectation.keys.count &&
           @expectation.keys.each do |key|
-            target.has_key?(key) &&
-            (target[key].should DeepEql.new(@expectation[key]))
+            @target.has_key?(key) &&
+            DeepEql.new(@expectation[key]).matches?(@target[key])
           end
         when Array
-          target.is_a?(Array) &&
-          target.count.should == @expectation.count &&
+          @target.is_a?(Array) &&
+          @target.count == @expectation.count &&
           @expectation.each_index do |index|
-            target[index].should DeepEql.new(@expectation[index])
+            DeepEql.new(@expectation[index]).matches?(@target[index])
           end
         else
-          target.should == @expectation
+          @target == @expectation
         end
       end
 
       def failure_message_for_should
         "expected #{@employee} to report to #{@manager}"
       end
+
+      def failure_message_for_should_not
+        "expected #{@target.inspect} not to be in Zone #{@expectation.inspect}"
+      end
     end
 
-    def deep_eql(expected)
-      DeepEql.new(expected)
-    end
   end
 end
