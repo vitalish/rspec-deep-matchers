@@ -1,5 +1,7 @@
-module Deep
-  module Matchers
-    VERSION = "0.0.1"
+module RSpec
+  module Deep
+    module Matchers
+      VERSION = "0.0.1"
+    end
   end
 end
