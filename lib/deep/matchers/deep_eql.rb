@@ -1,4 +1,4 @@
-module RSpec
+module Deep
   module Matchers
 
     def deep_eql(expected)

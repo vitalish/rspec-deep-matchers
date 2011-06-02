@@ -1,1 +1,1 @@
-require "rspec/matchers/deep_eql"
+require "deep/matchers"
