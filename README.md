@@ -10,7 +10,7 @@ describe "deep matchers usage" do
   it "should compare data-structures recursively" do
     expected = {:key => ["values", "are", ["good"]]}
 
-    get :get_expected_json
+    get :get_expected_json, :format => js
 
     body = JSON.parse(response.body)
     body.should deep_eql expected
