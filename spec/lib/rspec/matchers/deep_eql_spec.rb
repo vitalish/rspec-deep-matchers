@@ -134,4 +134,22 @@ describe 'deep_eql' do
 
   end
 
+  context "pretty printing" do
+      actual = { :foo => "bar", :baz => "quux", :foo2 => "bar", :baz2 => "quux", :foo3 => "bar", :baz3 => "quux",}
+      exp    = { :foo => "bar", :baz => "fnar" }
+      de = Deep::Matchers::DeepEql.new(exp)
+      de.matches?(actual).should == false
+      de.failure_message_for_should.should == 'expected {
+     :foo => "bar",
+     :baz => "quux",
+    :foo2 => "bar",
+    :baz2 => "quux",
+    :foo3 => "bar",
+    :baz3 => "quux"
+} to be deep_eql with {
+    :foo => "bar",
+    :baz => "fnar"
+}'
+    end
 end
+
