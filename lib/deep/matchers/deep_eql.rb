@@ -8,6 +8,13 @@ module Deep
     class DeepEql
 
       def initialize(expectation)
+        begin
+          require 'awesome_print'
+          require 'awesome_print/core_ext/kernel'
+          @have_ap = true
+        rescue Exception => e
+          @have_ap = false
+        end
         @expectation = expectation
       end
 
@@ -32,14 +39,23 @@ module Deep
         result
       end
 
+      def pretty_print(thing)
+        if @have_ap
+          thing.awesome_inspect(:plain => true)
+        else
+          thing.inspect
+        end
+      end
+
       def failure_message_for_should
-        "expected #{@target.inspect} to be deep_eql with #{@expectation.inspect}"
+        "expected #{pretty_print @target} to be deep_eql with #{pretty_print @expectation}"
       end
 
       def failure_message_for_should_not
-        "expected #{@target.inspect} not to be in deep_eql with #{@expectation.inspect}"
+        "expected #{pretty_print @target} not to be in deep_eql with #{pretty_print @expectation}"
       end
     end
 
   end
 end
+
